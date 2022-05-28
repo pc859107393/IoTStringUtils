@@ -15,4 +15,11 @@
         <listener class="com.github.pc859107393.iotstringutils.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <action id="Base64HelperPopup" class="com.github.pc859107393.iotstringutils.handler.EditorMenuHandler" text="IoTStringUtls">
+            <keyboard-shortcut first-keystroke="ctrl alt 6" keymap="$default" />
+            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+        </action>
+    </actions>
 </idea-plugin>
