@@ -1,10 +1,12 @@
 package com.github.pc859107393.iotstringutils
 
+import com.github.pc859107393.iotstringutils.util.StringUtils.isHex
 import com.intellij.ide.highlighter.XmlFileType
 import com.intellij.psi.xml.XmlFile
 import com.intellij.testFramework.TestDataPath
 import com.intellij.testFramework.fixtures.BasePlatformTestCase
 import com.intellij.util.PsiErrorElementUtil
+import junit.framework.TestCase
 
 @TestDataPath("\$CONTENT_ROOT/src/test/testData")
 class MyPluginTest : BasePlatformTestCase() {
@@ -27,5 +29,11 @@ class MyPluginTest : BasePlatformTestCase() {
 
     fun testRename() {
         myFixture.testRename("foo.xml", "foo_after.xml", "a2")
+    }
+
+    fun testStringUtil() {
+        TestCase.assertTrue("AABB1234".isHex())
+        TestCase.assertFalse("AABB123".isHex())
+        TestCase.assertFalse(null.isHex())
     }
 }

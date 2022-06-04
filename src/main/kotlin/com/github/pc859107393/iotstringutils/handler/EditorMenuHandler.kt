@@ -34,7 +34,4 @@ class EditorMenuHandler(defaultHandler: EditorActionHandler) : EditorAction(defa
         }
     }
 
-    override fun getEditor(dataContext: DataContext): Editor? {
-        return super.getEditor(dataContext)
-    }
 }
