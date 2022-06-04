@@ -7,7 +7,8 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.pc859107393.iotstringutils.services.MyApplicationService"/>
+        <applicationService
+                serviceImplementation="com.github.pc859107393.iotstringutils.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.pc859107393.iotstringutils.services.MyProjectService"/>
     </extensions>
 
@@ -17,9 +18,10 @@
     </applicationListeners>
 
     <actions>
-        <action id="Base64HelperPopup" class="com.github.pc859107393.iotstringutils.handler.EditorMenuHandler" text="IoTStringUtls">
-            <keyboard-shortcut first-keystroke="ctrl alt 6" keymap="$default" />
-            <add-to-group group-id="EditorPopupMenu" anchor="last" />
+        <action id="Base64HelperPopup" class="com.github.pc859107393.iotstringutils.handler.EditorMenuHandler"
+                text="IoTStringUtls" description="IoTStringUtls">
+            <keyboard-shortcut first-keystroke="ctrl alt 6" keymap="$default"/>
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>

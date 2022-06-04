@@ -5,7 +5,7 @@ import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.editor.actionSystem.EditorAction
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler
-import com.intellij.openapi.ui.popup.ListPopup
+import com.intellij.openapi.ui.popup.*
 
 /**
  * 编辑器上下文菜单拓展处理
@@ -13,7 +13,9 @@ import com.intellij.openapi.ui.popup.ListPopup
  * @author cheng
  * @date 2022年05月28日
  */
-class EditorMenuHandler(defaultHandler: EditorActionHandler) : EditorAction(defaultHandler) {
+class EditorMenuHandler(defaultHandler: EditorActionHandler?) : EditorAction(defaultHandler) {
+
+    constructor() : this(null)
 
     /**
      * 构造函数加载主菜单
@@ -29,9 +31,61 @@ class EditorMenuHandler(defaultHandler: EditorActionHandler) : EditorAction(defa
         return object : EditorActionHandler() {
             override fun doExecute(editor: Editor, caret: Caret?, dataContext: DataContext?) {
                 if (editor.selectionModel.hasSelection()) {
+                    val listPopup: ListPopup = this@EditorMenuHandler.getListPopup(editor)
+                    listPopup.showInBestPositionFor(editor)
                 }
             }
         }
+    }
+
+    private fun getListPopup(editor: Editor): ListPopup {
+        val instance: JBPopupFactory = JBPopupFactory.getInstance()
+        return instance.createListPopup(getListPopupStep(editor))
+    }
+
+    private fun getListPopupStep(editor: Editor) = object : ListPopupStep<String> {
+        override fun getTitle(): String = "IoTStringUtl"
+
+        override fun canceled() {
+        }
+
+        override fun isMnemonicsNavigationEnabled() = false
+
+        override fun getMnemonicNavigationFilter() = null
+
+        override fun isSpeedSearchEnabled() = false
+
+        override fun getSpeedSearchFilter(): SpeedSearchFilter<String>? = null
+
+        override fun isAutoSelectionEnabled() = false
+
+        override fun getFinalRunnable() = Runnable {
+
+        }
+
+        override fun getValues(): MutableList<String> {
+            return listOf("IoTStringUtl").toMutableList()
+        }
+
+        override fun getDefaultOptionIndex() = 0
+
+        override fun getSeparatorAbove(value: String?) = null
+
+        override fun getTextFor(value: String) = value
+
+        override fun getIconFor(value: String?) = null
+
+        override fun isSelectable(value: String?): Boolean {
+            return true
+        }
+
+        override fun hasSubstep(selectedValue: String?) = false
+
+        override fun onChosen(selectedValue: String?, finalChoice: Boolean): PopupStep<*>? {
+            println(selectedValue!!)
+            return null
+        }
+
     }
 
 }
